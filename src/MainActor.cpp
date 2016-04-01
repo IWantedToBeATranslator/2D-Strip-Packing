@@ -30,8 +30,8 @@ spColorRectSprite MainActor::spawnRandomBlock()
 
 	int posX = (int)rand() % (int)(stageWidth - buttonWidth);
 	int posY = (int)rand() % (int)(stageHeight - buttonHeight);
-	int bloxWidth = (int)rand() % (int)(stageWidth) / 4 + 20;
-	int bloxHeight = (int)rand() % (int)(stageHeight) / 5 + 20;
+	int bloxWidth = (int)rand() % (int)(stageWidth) / 6 + 20;
+	int bloxHeight = (int)rand() % (int)(stageHeight) / 7 + 20;
 
 	spColorRectSprite blox = initActor(
 		new ColorRectSprite,

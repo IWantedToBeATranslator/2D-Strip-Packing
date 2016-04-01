@@ -1,12 +1,14 @@
-#include "FirstFit.h"
+#include "BestFit.h"
 
-FirstFit::FirstFit()
+BestFit::BestFit()
 {
 	int tempbuf;
 	int levelH[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	int levels = 1;
 	int levelW[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	int levelHmin;
+	int BestPlace;
+	int BestLevel;
 
 	spColorRectSprite bloxBuffer;
 
@@ -37,12 +39,14 @@ FirstFit::FirstFit()
 	for (int i = 1; i < eCount; i++)
 	{
 		checker = 0;
+		BestPlace = 0;
+		BestLevel = levels;
 		for (int k = 0; k < levels; k++)
 		{
-			if (_blockClip->getWidth() - levelW[k] >= _bloxArray[i]->getWidth() && !checker)
+			if (_blockClip->getWidth() - levelW[k] >= _bloxArray[i]->getWidth() && BestPlace<levelW[k])
 			{
-				_bloxArray[i]->addTween(Actor::TweenPosition(levelW[k], levelH[k]), 500);
-				levelW[k] += _bloxArray[i]->getWidth();
+				BestPlace = levelW[k];
+				BestLevel = k;
 				checker = 1;
 			}
 		}
@@ -51,8 +55,13 @@ FirstFit::FirstFit()
 			levels++;
 			levelHmin += _bloxArray[i]->getHeight();
 			levelH[levels] = levelHmin;
-			_bloxArray[i]->addTween(Actor::TweenPosition(levelW[levels-1], levelH[levels-1]), 500);
-			levelW[levels-1] += _bloxArray[i]->getWidth();
+			_bloxArray[i]->addTween(Actor::TweenPosition(levelW[levels - 1], levelH[levels - 1]), 500);
+			levelW[levels - 1] += _bloxArray[i]->getWidth();
+		}
+		else
+		{
+			_bloxArray[i]->addTween(Actor::TweenPosition(levelW[BestLevel], levelH[BestLevel]), 500);
+			levelW[BestLevel] += _bloxArray[i]->getWidth();
 		}
 	}
 }

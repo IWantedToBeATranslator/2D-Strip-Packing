@@ -16,7 +16,38 @@ void Algos(int AlgNumber)
 	}
 	case (3) :
 	{
-		//BestFit();
+		BestFit();
+		break;
+	}
+	case (4) :
+	{
+		Knapsack01();
+		break;
+	}
+	case (5) :
+	{
+		break;
+	}
+	case (6) :
+	{
+		break;
+	}
+	case (7) :
+	{
+		break;
+	}
+	case (8) :
+	{
+		break;
+	}
+	case (9) :
+	{
+		break;
+	}
+	case (10) :
+	{
+		srand(time(0));
+
 		break;
 	}
 	}
