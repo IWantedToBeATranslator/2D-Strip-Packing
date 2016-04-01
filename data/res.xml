@@ -6,5 +6,5 @@
 	</atlas>
 	
 	<set path = "fonts" />
-	<font file="main.fnt" />	
+	<font file="font_visitor_small.fnt" />	
 </resources>
