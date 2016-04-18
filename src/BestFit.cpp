@@ -34,6 +34,8 @@ BestFit::BestFit()
 	levelW[0] = _bloxArray[0]->getWidth();
 	levelHmin = levelH[1];
 
+	int spaceUsed = levelH[1] * levelW[0];
+
 	int checker = 0;
 
 	for (int i = 1; i < eCount; i++)
@@ -41,9 +43,10 @@ BestFit::BestFit()
 		checker = 0;
 		BestPlace = 0;
 		BestLevel = levels;
+		spaceUsed += _bloxArray[i]->getHeight()*_bloxArray[i]->getWidth();
 		for (int k = 0; k < levels; k++)
 		{
-			if (_blockClip->getWidth() - levelW[k] >= _bloxArray[i]->getWidth() && BestPlace<levelW[k])
+			if (screenWidth - levelW[k] >= _bloxArray[i]->getWidth() && BestPlace<levelW[k])
 			{
 				BestPlace = levelW[k];
 				BestLevel = k;
@@ -64,4 +67,8 @@ BestFit::BestFit()
 			levelW[BestLevel] += _bloxArray[i]->getWidth();
 		}
 	}
+
+	algosHeights = levelHmin;
+	algosSpaces = algosHeights*screenWidth - spaceUsed;
+	updateState;
 }

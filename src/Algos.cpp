@@ -34,6 +34,7 @@ void Algos(int AlgNumber)
 	}
 	case (7) :
 	{
+		FloorCeiling();
 		break;
 	}
 	case (8) :
@@ -46,8 +47,40 @@ void Algos(int AlgNumber)
 	}
 	case (10) :
 	{
-		srand(time(0));
-
+		srand(time(0)+rand());
+		algosHeights = 0;
+		algosSpaces = 0;
+		updateState;
+		{
+			float buttonHeight = algosResources.getResAnim("button")->getHeight();
+			float buttonWidth = algosResources.getResAnim("button")->getWidth();
+			float stageHeight = getStage()->getHeight();
+			float stageWidth = getStage()->getWidth();
+			for (int i = 0; i < eCount / 4; i++)
+			{
+				_bloxArray[i]->detach();
+				_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 6, 6);
+				bloxHeights[i] = _bloxArray[i]->getHeight();
+			}
+			for (int i = eCount / 4; i < eCount / 2; i++)
+			{
+				_bloxArray[i]->detach();
+				_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 15, 6);
+				bloxHeights[i] = _bloxArray[i]->getHeight();
+			}
+			for (int i = eCount / 2; i < eCount / 4 * 3; i++)
+			{
+				_bloxArray[i]->detach();
+				_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 6, 15);
+				bloxHeights[i] = _bloxArray[i]->getHeight();
+			}
+			for (int i = eCount / 4 * 3; i < eCount; i++)
+			{
+				_bloxArray[i]->detach();
+				_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 15, 15);
+				bloxHeights[i] = _bloxArray[i]->getHeight();
+			}
+		}
 		break;
 	}
 	}

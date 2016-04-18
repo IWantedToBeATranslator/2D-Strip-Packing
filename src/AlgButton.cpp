@@ -7,7 +7,7 @@ AlgButton::AlgButton(int x, int y, std::string textstr, int actionNumber)
 
 	//setup it:
 	//set button.png image. Resource 'button' defined in 'res.xml'
-	button->setResAnim(gameResources.getResAnim("button"));
+	button->setResAnim(algosResources.getResAnim("button"));
 
 	//centered button at screen
 	Vector2 pos = Vector2(x, y);
@@ -36,7 +36,7 @@ AlgButton::AlgButton(int x, int y, std::string textstr, int actionNumber)
 	text->setPosition(button->getSize() / 2);
 
 	//initialize text style
-	style.font = gameResources.getResFont("font_visitor_small")->getFont();
+	style.font = algosResources.getResFont("font_visitor_small")->getFont();
 	style.color = Color::Black;
 	style.vAlign = TextStyle::VALIGN_MIDDLE;
 	style.hAlign = TextStyle::HALIGN_CENTER;

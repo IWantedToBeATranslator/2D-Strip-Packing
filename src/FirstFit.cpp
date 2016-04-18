@@ -7,6 +7,7 @@ FirstFit::FirstFit()
 	int levels = 1;
 	int levelW[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	int levelHmin;
+	int spaceUsed = 0;
 
 	spColorRectSprite bloxBuffer;
 
@@ -32,14 +33,17 @@ FirstFit::FirstFit()
 	levelW[0] = _bloxArray[0]->getWidth();
 	levelHmin = levelH[1];
 
+	spaceUsed += levelH[1] * levelW[0];
+
 	int checker = 0;
 
 	for (int i = 1; i < eCount; i++)
 	{
+		spaceUsed += _bloxArray[i]->getHeight()*_bloxArray[i]->getWidth();
 		checker = 0;
 		for (int k = 0; k < levels; k++)
 		{
-			if (_blockClip->getWidth() - levelW[k] >= _bloxArray[i]->getWidth() && !checker)
+			if (screenWidth - levelW[k] >= _bloxArray[i]->getWidth() && !checker)
 			{
 				_bloxArray[i]->addTween(Actor::TweenPosition(levelW[k], levelH[k]), 500);
 				levelW[k] += _bloxArray[i]->getWidth();
@@ -51,8 +55,12 @@ FirstFit::FirstFit()
 			levels++;
 			levelHmin += _bloxArray[i]->getHeight();
 			levelH[levels] = levelHmin;
-			_bloxArray[i]->addTween(Actor::TweenPosition(levelW[levels-1], levelH[levels-1]), 500);
-			levelW[levels-1] += _bloxArray[i]->getWidth();
+			_bloxArray[i]->addTween(Actor::TweenPosition(levelW[levels - 1], levelH[levels - 1]), 500);
+			levelW[levels - 1] += _bloxArray[i]->getWidth();
 		}
 	}
+
+	algosHeights = levelHmin;
+	algosSpaces = algosHeights*screenWidth - spaceUsed;
+	updateState;
 }

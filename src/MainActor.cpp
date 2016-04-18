@@ -15,37 +15,28 @@ MainActor::MainActor()
 	}
 
 	//Blocks Generation
+	for (int i = 0; i < eCount / 4; i++)
 	{
-		for (int i = 0; i < eCount; i++)
-		{
-			_bloxArray[i] = spawnRandomBlock();
-			bloxHeights[i] = _bloxArray[i]->getHeight();
-		}
+		_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 6, 6);
+		bloxHeights[i] = _bloxArray[i]->getHeight();
+	}
+	for (int i = eCount / 4; i < eCount / 2; i++)
+	{
+		_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 15, 6);
+		bloxHeights[i] = _bloxArray[i]->getHeight();
+	}
+	for (int i = eCount / 2; i < eCount / 4 * 3; i++)
+	{
+		_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 6, 15);
+		bloxHeights[i] = _bloxArray[i]->getHeight();
+	}
+	for (int i = eCount / 4 * 3; i < eCount; i++)
+	{
+		_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 15, 15);
+		bloxHeights[i] = _bloxArray[i]->getHeight();
 	}
 }
-
-spColorRectSprite MainActor::spawnRandomBlock()
-{
-	Color randColor((int)(rand() % 255), (int)(rand() % 255), (int)(rand() % 255), (int)(rand() % 255));
-
-	int posX = (int)rand() % (int)(stageWidth - buttonWidth);
-	int posY = (int)rand() % (int)(stageHeight - buttonHeight);
-	int bloxWidth = (int)rand() % (int)(stageWidth) / 6 + 20;
-	int bloxHeight = (int)rand() % (int)(stageHeight) / 7 + 20;
-
-	spColorRectSprite blox = initActor(
-		new ColorRectSprite,
-		arg_color = randColor,
-		arg_x = posX,
-		arg_y = posY,
-		arg_w = bloxWidth,
-		arg_h = bloxHeight,
-		arg_blend = blend_disabled
-		);
-	_blockClip->addChild(blox);
-	return blox;
-}
-
+/*
 spColorRectSprite MainActor::spawnGradientBlock(int Decreaser)
 {
 	//Color randColor(255-(Decreaser % 255), (int)(rand() % 255), (int)(rand() % 255), 255);
@@ -67,4 +58,4 @@ spColorRectSprite MainActor::spawnGradientBlock(int Decreaser)
 		);
 	_blockClip->addChild(blox);
 	return blox;
-}
+}*/

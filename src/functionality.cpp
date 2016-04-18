@@ -7,7 +7,7 @@ void func_preinit() {}
 void func_init()
 {
 	//load xml file with resources definition
-	gameResources.loadXML("res.xml");
+	algosResources.loadXML("res.xml");
 
 	//get new seed from current time
 	srand(time(0));
@@ -38,6 +38,19 @@ void func_init()
 	actor->addChild(BRKE.getButton());
 	actor->addChild(REST.getButton());
 
+	spTextField mainInfo = initActor(
+		new TextField,
+		arg_color = Color(0, 0, 0),
+		arg_x = 0,
+		arg_y = actor->stageHeight - 2 * actor->buttonHeight - 20,
+		arg_anchor = Vector2(1, 1),
+		arg_text = "Total height: " + (std::string)std::to_string(algosHeights) + "; Total unused space: " + (std::string)std::to_string(algosSpaces),
+		arg_attachTo = actor,
+		arg_input = false
+		);
+	actor->addChild(mainInfo);
+	_mainInfo = mainInfo;
+
 	//and append everything to Stage
 	getStage()->addChild(actor);
 }
@@ -51,5 +64,5 @@ void func_update()
 void func_destroy()
 {
 	//free previously loaded resources
-	gameResources.free();
+	algosResources.free();
 }

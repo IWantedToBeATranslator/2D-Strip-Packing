@@ -30,9 +30,12 @@ NextFit::NextFit()
 	levelH = _bloxArray[0]->getHeight();
 	levelW = _bloxArray[0]->getWidth();
 
+	int spaceUsed = levelH * levelW;
+
 	for (int i = 1; i < eCount; i++)
 	{
-		if (_blockClip->getWidth() - levelW >= _bloxArray[i]->getWidth())
+		spaceUsed += _bloxArray[i]->getHeight()*_bloxArray[i]->getWidth();
+		if (screenWidth - levelW >= _bloxArray[i]->getWidth())
 		{
 			_bloxArray[i]->addTween(Actor::TweenPosition(levelW, levelHminus), 500);
 			levelW += _bloxArray[i]->getWidth();
@@ -45,4 +48,8 @@ NextFit::NextFit()
 			_bloxArray[i]->addTween(Actor::TweenPosition(0, levelHminus), 500);
 		}
 	}
+
+	algosHeights = levelH;
+	algosSpaces = algosHeights*screenWidth - spaceUsed;
+	updateState;
 }

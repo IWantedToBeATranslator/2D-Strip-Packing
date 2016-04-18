@@ -11,14 +11,13 @@ public:
 	spSprite		_NFDHbutton;
 	spSprite		_FFDHbutton;
 
-	float buttonHeight = gameResources.getResAnim("button")->getHeight();
-	float buttonWidth = gameResources.getResAnim("button")->getWidth();
+	float buttonHeight = algosResources.getResAnim("button")->getHeight();
+	float buttonWidth = algosResources.getResAnim("button")->getWidth();
 	float stageHeight = getStage()->getHeight();
 	float stageWidth = getStage()->getWidth();
 
 	MainActor();
-	spColorRectSprite spawnRandomBlock();
-	spColorRectSprite spawnGradientBlock(int Decreaser);
+	//spColorRectSprite spawnGradientBlock(int Decreaser);
 };
 
 DECLARE_SMART(MainActor, spMainActor);
