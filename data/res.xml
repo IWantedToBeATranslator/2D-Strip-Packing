@@ -2,7 +2,8 @@
 <resources>
 	<set path = "images" />
 	<atlas>
-		<image file="button.png"/>		
+		<image file="button.png"/>
+		<image file="button_small.png"/>		
 	</atlas>
 	
 	<set path = "fonts" />
