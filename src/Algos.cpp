@@ -31,6 +31,7 @@ void Algos(int AlgNumber)
 	}
 	case (6) :
 	{
+		Join();
 		break;
 	}
 	case (7) :

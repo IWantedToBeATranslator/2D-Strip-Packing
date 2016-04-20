@@ -106,7 +106,7 @@ SplitFit::SplitFit()
 			if (Rcheck)
 			{
 				checker = 0;
-				for (int k = 0; k < levelsR; k++)
+				FOR(k, 0, levelsR)
 				{
 					if (regionRW - levelRW[k] >= ThinBlox[i]->getWidth() && !checker)
 					{
@@ -148,7 +148,7 @@ SplitFit::SplitFit()
 			if (Restcheck)
 			{
 				checker = 0;
-				for (int k = 0; k < levels; k++)
+				FOR(k, 0, levels)
 				{
 					if (clipWidth - levelW[k] >= ThinBlox[i]->getWidth() && !checker)
 					{
@@ -179,39 +179,6 @@ SplitFit::SplitFit()
 			}
 		}
 	}
-
-	/*
-	_bloxArray[0]->addTween(Actor::TweenPosition(0, 0), 500);
-	levelH[1] = _bloxArray[0]->getHeight();
-	levelW[0] = _bloxArray[0]->getWidth();
-	levelHmin = levelH[1];
-
-	spaceUsed += levelH[1] * levelW[0];
-
-	int checker = 0;
-
-	for (int i = 1; i < eCount; i++)
-	{
-		spaceUsed += _bloxArray[i]->getHeight()*_bloxArray[i]->getWidth();
-		checker = 0;
-		for (int k = 0; k < levels; k++)
-		{
-			if (screenWidth - levelW[k] >= _bloxArray[i]->getWidth() && !checker)
-			{
-				_bloxArray[i]->addTween(Actor::TweenPosition(levelW[k], levelH[k]), 500);
-				levelW[k] += _bloxArray[i]->getWidth();
-				checker = 1;
-			}
-		}
-		if (!checker)
-		{
-			levels++;
-			levelHmin += _bloxArray[i]->getHeight();
-			levelH[levels] = levelHmin;
-			_bloxArray[i]->addTween(Actor::TweenPosition(levelW[levels - 1], levelH[levels - 1]), 500);
-			levelW[levels - 1] += _bloxArray[i]->getWidth();
-		}
-	}*/
 
 	algosHeights = levelHmin;
 	algosSpaces = algosHeights*clipWidth - spaceUsed;

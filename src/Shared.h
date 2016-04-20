@@ -1,10 +1,9 @@
 #pragma once
 #include "oxygine-framework.h"
 #include <string>
-#include "TweenOutline.h"
 
 #define updateState _mainInfo->setText("Total height: " + (std::string)std::to_string(algosHeights) + "\n\nTotal unused space:\n" + (std::string)std::to_string(algosSpaces));
-#define FOR(i,m,n) for(int i=m; i<n; i++)
+#define FOR(i,a,z) for(int i=a; i<z; i++)
 
 using namespace oxygine;
 extern Resources			algosResources;
