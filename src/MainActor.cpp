@@ -7,11 +7,13 @@ MainActor::MainActor()
 			new ClipRectActor,
 			arg_x = 0,
 			arg_y = 0,
-			arg_size = Vector2(stageWidth, stageHeight - buttonHeight)
+			arg_size = Vector2(stageWidth - buttonWidth, stageHeight)
 			);
 		getStage()->addChild(blockClip);
 
 		_blockClip = blockClip;
+		clipHeight = _blockClip->getHeight();
+		clipWidth = _blockClip->getWidth();
 	}
 
 	//Blocks Generation
@@ -22,17 +24,17 @@ MainActor::MainActor()
 	}
 	for (int i = eCount / 4; i < eCount / 2; i++)
 	{
-		_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 15, 6);
+		_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 10, 3);
 		bloxHeights[i] = _bloxArray[i]->getHeight();
 	}
 	for (int i = eCount / 2; i < eCount / 4 * 3; i++)
 	{
-		_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 6, 15);
+		_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 2, 10);
 		bloxHeights[i] = _bloxArray[i]->getHeight();
 	}
 	for (int i = eCount / 4 * 3; i < eCount; i++)
 	{
-		_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 15, 15);
+		_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 9, 9);
 		bloxHeights[i] = _bloxArray[i]->getHeight();
 	}
 }

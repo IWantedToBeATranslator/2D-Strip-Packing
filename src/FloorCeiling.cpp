@@ -12,6 +12,8 @@ FloorCeiling::FloorCeiling()
 	int BestLevel;
 	Vector2 *FloorSpaces = new Vector2[eCount];
 	int levelFloorSpaces[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	int howmany = eCount / 3;
+	auto FSnumbers = new int[howmany][15]();
 	int levelFSiter = 1;
 
 	spColorRectSprite bloxBuffer;
@@ -59,7 +61,7 @@ FloorCeiling::FloorCeiling()
 		spaceUsed += _bloxArray[i]->getHeight()*_bloxArray[i]->getWidth();
 		for (int k = 0; k < levels; k++)
 		{
-			if (screenWidth - levelW[k] >= _bloxArray[i]->getWidth() && BestPlace < levelW[k])
+			if (clipWidth - levelW[k] >= _bloxArray[i]->getWidth() && BestPlace < levelW[k])
 			{
 				BestPlace = levelW[k];
 				BestLevel = k;
@@ -73,7 +75,6 @@ FloorCeiling::FloorCeiling()
 						(FloorSpaces[n].y >= _bloxArray[i]->getSize().y) &&
 						(BestPlace < FloorSpaces[n].x))
 					{
-						//log::message("mejmej ");
 						checker = 1;
 						BestPlace = FloorSpaces[n].x;
 						FLorCE = 1;
@@ -90,7 +91,7 @@ FloorCeiling::FloorCeiling()
 			levelH[levels] = levelHmin;
 			_bloxArray[i]->addTween(Actor::TweenPosition(levelW[levels - 1], levelH[levels - 1]), 500);
 			levelW[levels - 1] += _bloxArray[i]->getWidth();
-			BestPlace = screenWidth;
+			BestPlace = clipWidth;
 			levelFloorSpaces[levelFSiter + 1] = levelFloorSpaces[levelFSiter] + 1;
 			levelFSiter++;
 		}
@@ -100,12 +101,12 @@ FloorCeiling::FloorCeiling()
 			{
 				_bloxArray[i]->addTween(Actor::TweenPosition(levelW[BestLevel], levelH[BestLevel + 1] - _bloxArray[i]->getHeight()), 500);
 				levelW[BestLevel] += _bloxArray[i]->getWidth();
-				FloorSpaces[i] = Vector2(screenWidth-BestPlace, levelH[levels] - _bloxArray[i]->getHeight() - levelH[levels - 1]);
+				FloorSpaces[i] = Vector2(clipWidth - BestPlace, levelH[levels] - _bloxArray[i]->getHeight() - levelH[levels - 1]);
 				levelFloorSpaces[levelFSiter]++;
 			}
 			else
 			{
-				_bloxArray[i]->addTween(Actor::TweenPosition(screenWidth-_bloxArray[i]->getWidth()-floorW[FLlevel],levelH[FLlevel]), 500);
+				_bloxArray[i]->addTween(Actor::TweenPosition(clipWidth - _bloxArray[i]->getWidth() - floorW[FLlevel], levelH[FLlevel]), 500);
 				floorW[FLlevel] += _bloxArray[i]->getWidth();
 				for (int n = levelFloorSpaces[FLlevel]; n < levelFloorSpaces[FLlevel + 1]; n++)
 				{
@@ -116,6 +117,6 @@ FloorCeiling::FloorCeiling()
 	}
 
 	algosHeights = levelHmin;
-	algosSpaces = algosHeights*screenWidth - spaceUsed;
+	algosSpaces = algosHeights*clipWidth - spaceUsed;
 	updateState;
 }

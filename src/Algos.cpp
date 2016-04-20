@@ -26,6 +26,7 @@ void Algos(int AlgNumber)
 	}
 	case (5) :
 	{
+		SplitFit();
 		break;
 	}
 	case (6) :
@@ -65,19 +66,19 @@ void Algos(int AlgNumber)
 			for (int i = eCount / 4; i < eCount / 2; i++)
 			{
 				_bloxArray[i]->detach();
-				_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 15, 6);
+				_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 10, 3);
 				bloxHeights[i] = _bloxArray[i]->getHeight();
 			}
 			for (int i = eCount / 2; i < eCount / 4 * 3; i++)
 			{
 				_bloxArray[i]->detach();
-				_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 6, 15);
+				_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 2, 10);
 				bloxHeights[i] = _bloxArray[i]->getHeight();
 			}
 			for (int i = eCount / 4 * 3; i < eCount; i++)
 			{
 				_bloxArray[i]->detach();
-				_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 15, 15);
+				_bloxArray[i] = spawnRandomBlock(stageWidth, stageHeight, buttonWidth, buttonHeight, 9, 9);
 				bloxHeights[i] = _bloxArray[i]->getHeight();
 			}
 		}

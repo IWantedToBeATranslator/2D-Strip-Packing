@@ -43,7 +43,7 @@ FirstFit::FirstFit()
 		checker = 0;
 		for (int k = 0; k < levels; k++)
 		{
-			if (screenWidth - levelW[k] >= _bloxArray[i]->getWidth() && !checker)
+			if (clipWidth - levelW[k] >= _bloxArray[i]->getWidth() && !checker)
 			{
 				_bloxArray[i]->addTween(Actor::TweenPosition(levelW[k], levelH[k]), 500);
 				levelW[k] += _bloxArray[i]->getWidth();
@@ -61,6 +61,6 @@ FirstFit::FirstFit()
 	}
 
 	algosHeights = levelHmin;
-	algosSpaces = algosHeights*screenWidth - spaceUsed;
+	algosSpaces = algosHeights*clipWidth - spaceUsed;
 	updateState;
 }

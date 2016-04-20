@@ -35,7 +35,7 @@ NextFit::NextFit()
 	for (int i = 1; i < eCount; i++)
 	{
 		spaceUsed += _bloxArray[i]->getHeight()*_bloxArray[i]->getWidth();
-		if (screenWidth - levelW >= _bloxArray[i]->getWidth())
+		if (clipWidth - levelW >= _bloxArray[i]->getWidth())
 		{
 			_bloxArray[i]->addTween(Actor::TweenPosition(levelW, levelHminus), 500);
 			levelW += _bloxArray[i]->getWidth();
@@ -50,6 +50,6 @@ NextFit::NextFit()
 	}
 
 	algosHeights = levelH;
-	algosSpaces = algosHeights*screenWidth - spaceUsed;
+	algosSpaces = algosHeights*clipWidth - spaceUsed;
 	updateState;
 }

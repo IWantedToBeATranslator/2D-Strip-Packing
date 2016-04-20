@@ -46,7 +46,7 @@ BestFit::BestFit()
 		spaceUsed += _bloxArray[i]->getHeight()*_bloxArray[i]->getWidth();
 		for (int k = 0; k < levels; k++)
 		{
-			if (screenWidth - levelW[k] >= _bloxArray[i]->getWidth() && BestPlace<levelW[k])
+			if (clipWidth - levelW[k] >= _bloxArray[i]->getWidth() && BestPlace<levelW[k])
 			{
 				BestPlace = levelW[k];
 				BestLevel = k;
@@ -69,6 +69,6 @@ BestFit::BestFit()
 	}
 
 	algosHeights = levelHmin;
-	algosSpaces = algosHeights*screenWidth - spaceUsed;
+	algosSpaces = algosHeights*clipWidth - spaceUsed;
 	updateState;
 }

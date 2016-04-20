@@ -1,15 +1,17 @@
 #include "Shared.h"
 
 Resources			algosResources;
-int					eCount = 120;
+int					eCount = 60;
 spColorRectSprite*	_bloxArray = new spColorRectSprite[eCount];
 spClipRectActor		_blockClip;
 spTextField			_mainInfo;
 int*				bloxHeights = new int[eCount];
 int					algosHeights = 0;
 int					algosSpaces = 0;
-int					screenWidth = 750;
+int					screenWidth = 700;
 int					screenHeight = 1000;
+float				clipHeight;
+float				clipWidth;
 
 spColorRectSprite spawnRandomBlock(float stageWidth, float stageHeight, float buttonWidth, float buttonHeight, int Xmod, int Ymod)
 {
@@ -30,6 +32,7 @@ spColorRectSprite spawnRandomBlock(float stageWidth, float stageHeight, float bu
 		arg_blend = blend_disabled
 		);
 	_blockClip->addChild(blox);
+
 	spTextField bloxWidthText = initActor(
 		new TextField,
 		arg_color = Color(0,0,0),
