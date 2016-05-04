@@ -40,14 +40,14 @@ void func_init()
 
 	AlgButton NFDH = *new AlgButton(actor->stageWidth - actor->buttonWidth, 0, "Next Fit\nDecr High", 1);
 	AlgButton FFDH = *new AlgButton(actor->stageWidth - actor->buttonWidth, actor->buttonHeight, "First Fit\nDecr High", 2);
-	AlgButton BFDH = *new AlgButton(actor->stageWidth - actor->buttonWidth, 2* actor->buttonHeight, "Best Fit\nDecr High", 3);
-	AlgButton KPSK = *new AlgButton(actor->stageWidth - actor->buttonWidth, 3* actor->buttonHeight, "Knapsack 0-1", 4);
-	AlgButton SPLT = *new AlgButton(actor->stageWidth - actor->buttonWidth, 4* actor->buttonHeight, "Split Fit", 5);
-	AlgButton JOIN = *new AlgButton(actor->stageWidth - actor->buttonWidth, 5* actor->buttonHeight, "Join", 6);
-	AlgButton FCNR = *new AlgButton(actor->stageWidth - actor->buttonWidth, 6* actor->buttonHeight, "Floor Ceiling\nNo Rotation", 7);
-	AlgButton SLTR = *new AlgButton(actor->stageWidth - actor->buttonWidth, 7* actor->buttonHeight, "Sleathor", 8);
-	AlgButton BRKE = *new AlgButton(actor->stageWidth - actor->buttonWidth, 8* actor->buttonHeight, "Burke", 9);
-	AlgButton REST = *new AlgButton(actor->stageWidth - actor->buttonWidth, 9* actor->buttonHeight, "Reset", 10);
+	AlgButton BFDH = *new AlgButton(actor->stageWidth - actor->buttonWidth, 2 * actor->buttonHeight, "Best Fit\nDecr High", 3);
+	AlgButton KPSK = *new AlgButton(actor->stageWidth - actor->buttonWidth, 3 * actor->buttonHeight, "Knapsack 0-1", 4);
+	AlgButton SPLT = *new AlgButton(actor->stageWidth - actor->buttonWidth, 4 * actor->buttonHeight, "Split Fit", 5);
+	AlgButton JOIN = *new AlgButton(actor->stageWidth - actor->buttonWidth, 5 * actor->buttonHeight, "Join", 6);
+	AlgButton FCNR = *new AlgButton(actor->stageWidth - actor->buttonWidth, 6 * actor->buttonHeight, "Floor Ceiling\nNo Rotation", 7);
+	AlgButton SLTR = *new AlgButton(actor->stageWidth - actor->buttonWidth, 7 * actor->buttonHeight, "Sleathor", 8);
+	AlgButton BRKE = *new AlgButton(actor->stageWidth - actor->buttonWidth, 8 * actor->buttonHeight, "Burke", 9);
+	AlgButton REST = *new AlgButton(actor->stageWidth - actor->buttonWidth, 9 * actor->buttonHeight, "Reset", 10);
 
 	//append buttons to MainActor
 	actor->addChild(NFDH.getButton());
@@ -67,10 +67,10 @@ void func_init()
 		arg_x = actor->stageWidth - actor->buttonWidth + 5,
 		arg_y = 10 * actor->buttonHeight + 5,
 		arg_anchor = Vector2(1, 1),
-		arg_text = "Total height: " + (std::string)std::to_string(algosHeights) + "\n\nTotal unused space:\n" + (std::string)std::to_string(algosSpaces),
+		arg_text = "Total height:\n" + (std::string)std::to_string(algosHeights) + "\n\nTotal unused space:\n" + (std::string)std::to_string(algosSpaces) + "\n\nFullness rating:\n" + (std::string)std::to_string(spaceUsed / clipWidth / algosHeights),
 		arg_attachTo = actor,
 		arg_input = false
-		);
+	);
 	actor->addChild(mainInfo);
 	_mainInfo = mainInfo;
 

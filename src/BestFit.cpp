@@ -2,7 +2,6 @@
 
 BestFit::BestFit()
 {
-	int tempbuf;
 	int levelH[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	int levels = 1;
 	int levelW[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
@@ -10,47 +9,27 @@ BestFit::BestFit()
 	int BestPlace;
 	int BestLevel;
 
-	spColorRectSprite bloxBuffer;
-
-	for (int m = 0; m < eCount; m++)
-	{
-		for (int n = 0; n < eCount - 1; n++)
-		{
-			if (bloxHeights[n] < bloxHeights[n + 1])
-			{
-				tempbuf = bloxHeights[n];
-				bloxHeights[n] = bloxHeights[n + 1];
-				bloxHeights[n + 1] = tempbuf;
-
-				bloxBuffer = _bloxArray[n];
-				_bloxArray[n] = _bloxArray[n + 1];
-				_bloxArray[n + 1] = bloxBuffer;
-			}
-		}
-	}
+	sortNonDecr(_bloxArray, bloxHeights, bloxWidths);
 
 	_bloxArray[0]->addTween(Actor::TweenPosition(0, 0), 500);
 	levelH[1] = _bloxArray[0]->getHeight();
 	levelW[0] = _bloxArray[0]->getWidth();
 	levelHmin = levelH[1];
 
-	int spaceUsed = levelH[1] * levelW[0];
+	bool checker = false;
 
-	int checker = 0;
-
-	for (int i = 1; i < eCount; i++)
+	FOR(i, 1, eCount)
 	{
-		checker = 0;
+		checker = false;
 		BestPlace = 0;
 		BestLevel = levels;
-		spaceUsed += _bloxArray[i]->getHeight()*_bloxArray[i]->getWidth();
-		for (int k = 0; k < levels; k++)
+		FOR(k, 0, levels)
 		{
-			if (clipWidth - levelW[k] >= _bloxArray[i]->getWidth() && BestPlace<levelW[k])
+			if (clipWidth - levelW[k] >= _bloxArray[i]->getWidth() && BestPlace < levelW[k])
 			{
 				BestPlace = levelW[k];
 				BestLevel = k;
-				checker = 1;
+				checker = true;
 			}
 		}
 		if (!checker)
@@ -69,6 +48,5 @@ BestFit::BestFit()
 	}
 
 	algosHeights = levelHmin;
-	algosSpaces = algosHeights*clipWidth - spaceUsed;
 	updateState;
 }

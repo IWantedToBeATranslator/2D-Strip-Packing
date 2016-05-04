@@ -1,89 +1,70 @@
-#include "FloorCeiling.h"
+﻿#include "FloorCeiling.h"
 
 FloorCeiling::FloorCeiling()
 {
-	int tempbuf;
-	int levelH[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	int levelH[20] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	int levels = 1;
-	int levelW[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
-	int floorW[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	int levelW[20] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	int floorW[20] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	int levelHmin;
 	int BestPlace;
 	int BestLevel;
 	Vector2 *FloorSpaces = new Vector2[eCount];
-	int levelFloorSpaces[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
-	int howmany = eCount / 3;
-	auto FSnumbers = new int[howmany][15]();
-	int levelFSiter = 1;
+	int levelFloorSpaces[20] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }; //кол-во элементов в уровне на потолке
+	int howmany = eCount;
+	auto FSnumbers = new int[howmany][20](); // номера элементов на потолке по уровням
 
-	spColorRectSprite bloxBuffer;
-
-	for (int m = 0; m < eCount; m++)
-	{
-		for (int n = 0; n < eCount - 1; n++)
-		{
-			if (bloxHeights[n] < bloxHeights[n + 1])
-			{
-				tempbuf = bloxHeights[n];
-				bloxHeights[n] = bloxHeights[n + 1];
-				bloxHeights[n + 1] = tempbuf;
-
-				bloxBuffer = _bloxArray[n];
-				_bloxArray[n] = _bloxArray[n + 1];
-				_bloxArray[n + 1] = bloxBuffer;
-			}
-		}
-	}
+	sortNonDecr(_bloxArray, bloxHeights, bloxWidths);
 
 	_bloxArray[0]->addTween(Actor::TweenPosition(0, 0), 500);
 	levelH[1] = _bloxArray[0]->getHeight();
 	levelW[0] = _bloxArray[0]->getWidth();
 	levelHmin = levelH[1];
-	levelFloorSpaces[levelFSiter] = 1;
-	for (int i = 0; i < eCount; i++)
-	{
-		FloorSpaces[i] = Vector2(0, 0);
-	}
+	levelFloorSpaces[0] = 1;
+	FSnumbers[0][0] = 0;
+	FOR(i, 0, eCount) FloorSpaces[i] = Vector2(0, 0);
 
-	int spaceUsed = levelH[1] * levelW[0];
-
-	int checker = 0;
-	int FLorCE = 0;
+	bool checker = false;
+	bool FLorCE = false;
 	int FLlevel = 0;
+	int tempbuf = 0;
 
-	for (int i = 1; i < eCount; i++)
+	FOR(i, 1, eCount)
 	{
 		FLlevel = 0;
-		FLorCE = 0;
-		checker = 0;
+		FLorCE = false;
+		checker = false;
 		BestPlace = 0;
 		BestLevel = levels;
-		spaceUsed += _bloxArray[i]->getHeight()*_bloxArray[i]->getWidth();
-		for (int k = 0; k < levels; k++)
+		FOR(k, 0, levels)
 		{
+			// Checking ceiling
 			if (clipWidth - levelW[k] >= _bloxArray[i]->getWidth() && BestPlace < levelW[k])
 			{
 				BestPlace = levelW[k];
 				BestLevel = k;
-				checker = 1;
+				checker = true;
 			}
+			// Checking floor
 			else
 			{
-				for (int n = levelFloorSpaces[k]; n < levelFloorSpaces[k + 1]; n++)
+				FOR(n, 0, levelFloorSpaces[k])
 				{
-					if ((FloorSpaces[n].x >= _bloxArray[i]->getSize().x) &&
-						(FloorSpaces[n].y >= _bloxArray[i]->getSize().y) &&
-						(BestPlace < FloorSpaces[n].x))
+					if ((FloorSpaces[FSnumbers[n][k]].x >= _bloxArray[i]->getSize().x) &&
+						(FloorSpaces[FSnumbers[n][k]].y >= _bloxArray[i]->getSize().y) &&
+						(BestPlace < FloorSpaces[FSnumbers[n][k]].x))
 					{
-						checker = 1;
-						BestPlace = FloorSpaces[n].x;
-						FLorCE = 1;
+						checker = true;
+						BestPlace = FloorSpaces[FSnumbers[n][k]].x;
+						FLorCE = true;
 						FLlevel = k;
+						tempbuf = n;
 						break;
 					}
 				}
 			}
 		}
+		// New level
 		if (!checker)
 		{
 			levels++;
@@ -92,31 +73,40 @@ FloorCeiling::FloorCeiling()
 			_bloxArray[i]->addTween(Actor::TweenPosition(levelW[levels - 1], levelH[levels - 1]), 500);
 			levelW[levels - 1] += _bloxArray[i]->getWidth();
 			BestPlace = clipWidth;
-			levelFloorSpaces[levelFSiter + 1] = levelFloorSpaces[levelFSiter] + 1;
-			levelFSiter++;
+			levelFloorSpaces[levels - 1] = 1;
+			FSnumbers[0][levels - 1] = i;
 		}
+		// On existing level
 		else
 		{
+			// On ceiling
 			if (!FLorCE)
 			{
 				_bloxArray[i]->addTween(Actor::TweenPosition(levelW[BestLevel], levelH[BestLevel + 1] - _bloxArray[i]->getHeight()), 500);
 				levelW[BestLevel] += _bloxArray[i]->getWidth();
-				FloorSpaces[i] = Vector2(clipWidth - BestPlace, levelH[levels] - _bloxArray[i]->getHeight() - levelH[levels - 1]);
-				levelFloorSpaces[levelFSiter]++;
+				FSnumbers[levelFloorSpaces[BestLevel]][BestLevel] = i;
+				FloorSpaces[i] = Vector2(clipWidth - BestPlace, levelH[BestLevel+1] - _bloxArray[i]->getHeight() - levelH[BestLevel]);
+				levelFloorSpaces[BestLevel]++;
 			}
+			// On floor
 			else
 			{
-				_bloxArray[i]->addTween(Actor::TweenPosition(clipWidth - _bloxArray[i]->getWidth() - floorW[FLlevel], levelH[FLlevel]), 500);
 				floorW[FLlevel] += _bloxArray[i]->getWidth();
-				for (int n = levelFloorSpaces[FLlevel]; n < levelFloorSpaces[FLlevel + 1]; n++)
+				_bloxArray[i]->addTween(Actor::TweenPosition(clipWidth - floorW[FLlevel], levelH[FLlevel]), 500);
+				FOR(n, 0, levelFloorSpaces[FLlevel])
 				{
-					FloorSpaces[n].x = FloorSpaces[n].x - _bloxArray[i]->getWidth();
+					FloorSpaces[FSnumbers[n][FLlevel]].x = FloorSpaces[FSnumbers[n][FLlevel]].x - _bloxArray[i]->getWidth();
 				}
 			}
 		}
 	}
 
+	FOR(i, 0, levels)
+		FOR(n, 0, levelFloorSpaces[i])
+		{
+			int a = 1;
+		}
+
 	algosHeights = levelHmin;
-	algosSpaces = algosHeights*clipWidth - spaceUsed;
 	updateState;
 }

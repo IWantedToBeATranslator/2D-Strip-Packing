@@ -2,39 +2,18 @@
 
 NextFit::NextFit()
 {
-	int tempbuf;
 	int levelHminus = 0;
 	int levelH = 0;
 	int levelW = 0;
 
-	spColorRectSprite bloxBuffer;
-
-	for (int m = 0; m < eCount; m++)
-	{
-		for (int n = 0; n < eCount - 1; n++)
-		{
-			if (bloxHeights[n] < bloxHeights[n + 1])
-			{
-				tempbuf = bloxHeights[n];
-				bloxHeights[n] = bloxHeights[n + 1];
-				bloxHeights[n + 1] = tempbuf;
-
-				bloxBuffer = _bloxArray[n];
-				_bloxArray[n] = _bloxArray[n + 1];
-				_bloxArray[n + 1] = bloxBuffer;
-			}
-		}
-	}
+	sortNonDecr(_bloxArray, bloxHeights, bloxWidths);
 
 	_bloxArray[0]->addTween(Actor::TweenPosition(0, 0), 500);
 	levelH = _bloxArray[0]->getHeight();
 	levelW = _bloxArray[0]->getWidth();
 
-	int spaceUsed = levelH * levelW;
-
-	for (int i = 1; i < eCount; i++)
+	FOR(i, 1, eCount)
 	{
-		spaceUsed += _bloxArray[i]->getHeight()*_bloxArray[i]->getWidth();
 		if (clipWidth - levelW >= _bloxArray[i]->getWidth())
 		{
 			_bloxArray[i]->addTween(Actor::TweenPosition(levelW, levelHminus), 500);
@@ -50,6 +29,5 @@ NextFit::NextFit()
 	}
 
 	algosHeights = levelH;
-	algosSpaces = algosHeights*clipWidth - spaceUsed;
 	updateState;
 }

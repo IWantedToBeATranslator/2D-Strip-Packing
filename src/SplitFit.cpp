@@ -2,12 +2,10 @@
 
 SplitFit::SplitFit()
 {
-	int tempbuf;
 	int levelH[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	int levels = 1;
 	int levelW[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	int levelHmin = 0;
-	int spaceUsed = 0;
 
 	int levelRH[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	int levelsR = 1;
@@ -18,18 +16,7 @@ SplitFit::SplitFit()
 	spColorRectSprite *WideBlox = new spColorRectSprite[eCount];
 	spColorRectSprite *ThinBlox = new spColorRectSprite[eCount];
 
-	FOR(i, 0, eCount)
-		FOR(n, 0, eCount-1)
-			if (bloxHeights[n] < bloxHeights[n + 1])
-			{
-				tempbuf = bloxHeights[n];
-				bloxHeights[n] = bloxHeights[n + 1];
-				bloxHeights[n + 1] = tempbuf;
-
-				bloxBuffer = _bloxArray[n];
-				_bloxArray[n] = _bloxArray[n + 1];
-				_bloxArray[n + 1] = bloxBuffer;
-			}
+	sortNonDecr(_bloxArray, bloxHeights, bloxWidths);
 
 	int CountRest = 0;
 	int Count12 = 0;
@@ -48,14 +35,13 @@ SplitFit::SplitFit()
 	}
 
 	FOR(i, 0, Count12)
-		FOR (j, 0, Count12-1)
-			if (WideBlox[j]->getWidth() < WideBlox[j + 1]->getWidth())
-			{
-				bloxBuffer = WideBlox[j];
-				WideBlox[j] = WideBlox[j + 1];
-				WideBlox[j + 1] = bloxBuffer;
-			}
-
+		FOR(j, 0, Count12 - 1)
+		if (WideBlox[j]->getWidth() < WideBlox[j + 1]->getWidth())
+		{
+			bloxBuffer = WideBlox[j];
+			WideBlox[j] = WideBlox[j + 1];
+			WideBlox[j + 1] = bloxBuffer;
+		}
 
 	FOR(i, 0, Count12)
 	{
@@ -82,7 +68,6 @@ SplitFit::SplitFit()
 		regionRH += WideBlox[i]->getHeight();
 	}
 
-
 	int Rcheck = 0;
 	int Restcheck = 0;
 	int checker = 0;
@@ -91,15 +76,9 @@ SplitFit::SplitFit()
 	FOR(i, 0, CountRest)
 	{
 		if ((ThinBlox[i]->getHeight() <= regionRH) && (ThinBlox[i]->getWidth() <= regionRW))
-		{
 			RorO = 1;
-		}
 		else
-		{
 			RorO = 0;
-		}
-
-		spaceUsed += ThinBlox[i]->getHeight()*ThinBlox[i]->getWidth();
 
 		if (RorO)
 		{
@@ -110,7 +89,7 @@ SplitFit::SplitFit()
 				{
 					if (regionRW - levelRW[k] >= ThinBlox[i]->getWidth() && !checker)
 					{
-						ThinBlox[i]->addTween(Actor::TweenPosition(regionRX+levelRW[k], regionRY+levelRH[k]), 500);
+						ThinBlox[i]->addTween(Actor::TweenPosition(regionRX + levelRW[k], regionRY + levelRH[k]), 500);
 						levelRW[k] += ThinBlox[i]->getWidth();
 						checker = 1;
 					}
@@ -122,13 +101,11 @@ SplitFit::SplitFit()
 						levelsR++;
 						levelRHmin += ThinBlox[i]->getHeight();
 						levelRH[levelsR] = levelRHmin;
-						ThinBlox[i]->addTween(Actor::TweenPosition(regionRX+levelRW[levelsR - 1], regionRY+levelRH[levelsR - 1]), 500);
+						ThinBlox[i]->addTween(Actor::TweenPosition(regionRX + levelRW[levelsR - 1], regionRY + levelRH[levelsR - 1]), 500);
 						levelRW[levelsR - 1] += ThinBlox[i]->getWidth();
 					}
 					else
-					{
 						RorO = 0;
-					}
 				}
 			}
 			else
@@ -142,7 +119,7 @@ SplitFit::SplitFit()
 				checker = 0;
 			}
 		}
-		
+
 		if (!RorO)
 		{
 			if (Restcheck)
@@ -171,7 +148,7 @@ SplitFit::SplitFit()
 				Restcheck = 1;
 				ThinBlox[i]->addTween(Actor::TweenPosition(0, levelHmin), 500);
 				levelH[0] = levelHmin;
-				levelH[1] = levelHmin+ThinBlox[i]->getHeight();
+				levelH[1] = levelHmin + ThinBlox[i]->getHeight();
 				levelW[0] = ThinBlox[i]->getWidth();
 				levelHmin = levelH[1];
 
@@ -181,6 +158,5 @@ SplitFit::SplitFit()
 	}
 
 	algosHeights = levelHmin;
-	algosSpaces = algosHeights*clipWidth - spaceUsed;
 	updateState;
 }
