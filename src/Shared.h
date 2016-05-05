@@ -4,6 +4,7 @@
 
 #define updateState _mainInfo->setText("Total height:\n" + (std::string)std::to_string(algosHeights) + "\n\nTotal unused space:\n" + (std::string)std::to_string(algosHeights*clipWidth - spaceUsed) + "\n\nFullness rating:\n" + (std::string)std::to_string(spaceUsed/(clipWidth*algosHeights)));
 #define FOR(i,a,z) for(int i=a; i<z; i++)
+#define MAX(a,b) a<b?b:a
 
 using namespace oxygine;
 extern Resources			algosResources;

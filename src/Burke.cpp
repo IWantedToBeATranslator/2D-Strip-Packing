@@ -2,7 +2,8 @@
 
 Burke::Burke()
 {
-	/* Starting declarations */
+	/*
+	// Starting declarations
 	int tempbuf;
 	int IsOrdered;
 	int levelH[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
@@ -15,7 +16,7 @@ Burke::Burke()
 	int Counter;
 	int tempX;
 
-	/* Sorting: non-increasing HEIGHT (just in case) */
+	// Sorting: non-increasing HEIGHT (just in case)
 	for (int m = 0; m < eCount; m++)
 	{
 		for (int n = 0; n < eCount - 1; n++)
@@ -33,7 +34,7 @@ Burke::Burke()
 		}
 	}
 
-	/* Sorting: non-increasing WIDTH */
+	// Sorting: non-increasing WIDTH
 	for (int m = 0; m < eCount; m++)
 	{
 		for (int n = 0; n < eCount - 1; n++)
@@ -51,7 +52,7 @@ Burke::Burke()
 		}
 	}
 
-	/* Order and placement arrays declarations for all methods */
+	// Order and placement arrays declarations for all methods
 	int *LeftmostOrder = new int[eCount];
 	auto LeftmostXY = new int[eCount][2];
 	int *TallestOrder = new int[eCount];
@@ -60,13 +61,13 @@ Burke::Burke()
 	auto SmallestXY = new int[eCount][2];
 
 
-	/* Leftmost */
+	// Leftmost
 	IsOrdered = 0;
 	Counter = 0;
 	heightMap[0][0] = 0; heightMap[0][1] = 0; heightMap[0][2] = clipWidth;
 	while (!IsOrdered)
 	{
-		//Lowest gap
+		// Lowest gap
 		levelHmin = heightMap[0][1];
 		tempbuf = 0;
 		FOR(i,0,Counter+1)
@@ -80,7 +81,7 @@ Burke::Burke()
 		tempbuf = 1;
 
 	}
-	IsOrdered = 0;
+	IsOrdered = 0;*/
 
 	/* Tallest neighbour */
 
