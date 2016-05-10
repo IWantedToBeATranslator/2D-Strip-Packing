@@ -9,8 +9,6 @@
 #include "SplitFit.h"
 #include "Join.h"
 #include "FloorCeiling.h"
-#include "Sleator.h"
-#include "Burke.h"
 
 
 using namespace oxygine;

@@ -39,16 +39,6 @@ void Algos(int AlgNumber)
 		FloorCeiling();
 		break;
 	}
-	case (8):
-	{
-		Sleator();
-		break;
-	}
-	case (9):
-	{
-		Burke();
-		break;
-	}
 	case (10):
 	{
 		int timeseed = time(0);
