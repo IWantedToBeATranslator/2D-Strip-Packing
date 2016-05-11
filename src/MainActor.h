@@ -13,6 +13,8 @@ public:
 
 	float buttonHeight = algosResources.getResAnim("button")->getHeight();
 	float buttonWidth = algosResources.getResAnim("button")->getWidth();
+	float buttonSmallHeight = algosResources.getResAnim("button_small")->getHeight();
+	float buttonSmallWidth = algosResources.getResAnim("button_small")->getWidth();
 	float stageHeight = getStage()->getHeight();
 	float stageWidth = getStage()->getWidth();
 

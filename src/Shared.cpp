@@ -1,7 +1,7 @@
 #include "Shared.h"
 
 Resources			algosResources;
-int					eCount = 60;
+int					eCount = 120;
 spColorRectSprite*	_bloxArray = new spColorRectSprite[eCount];
 spClipRectActor		_blockClip;
 spTextField			_mainInfo;
@@ -35,6 +35,54 @@ spColorRectSprite spawnRandomBlock(float stageWidth, float stageHeight, float bu
 	);
 	_blockClip->addChild(blox);
 
+	spColorRectSprite left = initActor(
+		new ColorRectSprite,
+		arg_color = Color::Black,
+		arg_x = 0,
+		arg_y = 0,
+		arg_w = 1,
+		arg_h = bloxHeight,
+		arg_attachTo = blox,
+		arg_blend = blend_disabled
+	);
+	blox->addChild(left);
+
+	spColorRectSprite right = initActor(
+		new ColorRectSprite,
+		arg_color = Color::Black,
+		arg_x = bloxWidth-1,
+		arg_y = 0,
+		arg_w = 1,
+		arg_h = bloxHeight,
+		arg_attachTo = blox,
+		arg_blend = blend_disabled
+	);
+	blox->addChild(right);
+
+	spColorRectSprite top = initActor(
+		new ColorRectSprite,
+		arg_color = Color::Black,
+		arg_x = 0,
+		arg_y = 0,
+		arg_w = bloxWidth,
+		arg_h = 1,
+		arg_attachTo = blox,
+		arg_blend = blend_disabled
+	);
+	blox->addChild(top);
+
+	spColorRectSprite bottom = initActor(
+		new ColorRectSprite,
+		arg_color = Color::Black,
+		arg_x = 0,
+		arg_y = bloxHeight-1,
+		arg_w = bloxWidth,
+		arg_h = 1,
+		arg_attachTo = blox,
+		arg_blend = blend_disabled
+	);
+	blox->addChild(bottom);
+
 	spTextField bloxWidthText = initActor(
 		new TextField,
 		arg_color = Color(0, 0, 0),
@@ -46,7 +94,6 @@ spColorRectSprite spawnRandomBlock(float stageWidth, float stageHeight, float bu
 	);
 	Rect tempRect = bloxWidthText->getTextRect();
 	bloxWidthText->setX(bloxWidth / 2 - tempRect.getWidth() / 2);
-	//bloxWidthText->setHAlign(TextStyle::HorizontalAlign(bloxWidth / 2));
 	blox->addChild(bloxWidthText);
 
 	spTextField bloxHeightText = initActor(
@@ -61,7 +108,6 @@ spColorRectSprite spawnRandomBlock(float stageWidth, float stageHeight, float bu
 	);
 	tempRect = bloxHeightText->getTextRect();
 	bloxHeightText->setY(bloxHeight / 2 + tempRect.getHeight() / 2);
-	//bloxHeightText->setVAlign(TextStyle::VerticalAlign(bloxHeight / 2));
 	blox->addChild(bloxHeightText);
 
 	return blox;

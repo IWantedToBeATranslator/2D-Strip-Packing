@@ -32,6 +32,8 @@ void func_init()
 	AlgButton JOIN = *new AlgButton(actor->stageWidth - actor->buttonWidth, 5 * actor->buttonHeight, "Join", 6);
 	AlgButton FCNR = *new AlgButton(actor->stageWidth - actor->buttonWidth, 6 * actor->buttonHeight, "Floor Ceiling\nNo Rotation", 7);
 	AlgButton REST = *new AlgButton(actor->stageWidth - actor->buttonWidth, 7 * actor->buttonHeight, "Reset", 10);
+	AlgButton UP = *new AlgButton(actor->stageWidth - actor->buttonSmallWidth, actor->stageHeight-2*actor->buttonSmallHeight, -2);
+	AlgButton DN = *new AlgButton(actor->stageWidth - actor->buttonSmallWidth, actor->stageHeight- actor->buttonSmallHeight, -3);
 
 	//append buttons to MainActor
 	actor->addChild(NFDH.getButton());
@@ -42,6 +44,8 @@ void func_init()
 	actor->addChild(JOIN.getButton());
 	actor->addChild(FCNR.getButton());
 	actor->addChild(REST.getButton());
+	actor->addChild(UP.getButton());
+	actor->addChild(DN.getButton());
 
 	spTextField mainInfo = initActor(
 		new TextField,

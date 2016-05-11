@@ -50,15 +50,15 @@ Knapsack01::Knapsack01()
 		{
 			FOR(y, 1, tempWidth+1)
 			{
-				if (y < bloxWidths[whatToPack[k - 1]])
+				if (y < bloxWidths[whatToPack[k-1]])
 				{
 					KPMatrix[k*tempWidth + (y - 1)] = KPMatrix[(k - 1)*tempWidth + (y - 1)];
 				}
 				else if (y > bloxWidths[whatToPack[k - 1]])
 				{
 					KPMatrix[k*tempWidth + (y - 1)] =
-						MAX(KPMatrix[(k - 1)*tempWidth + (y - 1)], KPMatrix[(k - 1)*tempWidth + (y - 1) - bloxWidths[whatToPack[k - 1]]])
-						+ bloxWidths[whatToPack[k - 1]] * bloxHeights[whatToPack[k - 1]];
+						MAX(KPMatrix[(k - 1)*tempWidth + (y - 1)], KPMatrix[(k - 1)*tempWidth + (y - 1) - bloxWidths[whatToPack[k - 1]]]
+						+ bloxWidths[whatToPack[k - 1]] * bloxHeights[whatToPack[k - 1]]);
 				}
 				else
 				{
@@ -93,7 +93,7 @@ Knapsack01::Knapsack01()
 		{
 			if (Answer[i])
 			{
-				if (first) { levelHeights[levels] = levelHeights[levels - 1] + bloxHeights[i]; first = false; }
+				if (first) { levelHeights[levels] = levelHeights[levels - 1] + bloxHeights[whatToPack[i]]; first = false; }
 				_bloxArray[whatToPack[i]]->addTween(Actor::TweenPosition(levelPositions[levels - 1], levelHeights[levels - 1]), 500);
 				levelPositions[levels - 1] += bloxWidths[whatToPack[i]];
 				levelWidths[levels - 1] = levelWidths[levels-1] - bloxWidths[whatToPack[i]];

@@ -7,7 +7,7 @@ MainActor::MainActor()
 			new ClipRectActor,
 			arg_x = 0,
 			arg_y = 0,
-			arg_size = Vector2(stageWidth - buttonWidth, stageHeight)
+			arg_size = Vector2(stageWidth - buttonWidth, 3*stageHeight)
 		);
 		getStage()->addChild(blockClip);
 

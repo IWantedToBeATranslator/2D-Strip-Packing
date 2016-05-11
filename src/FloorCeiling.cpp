@@ -2,17 +2,17 @@
 
 FloorCeiling::FloorCeiling()
 {
-	int levelH[20] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	int levelH[30] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	int levels = 1;
-	int levelW[20] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
-	int floorW[20] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	int levelW[30] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	int floorW[30] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	int levelHmin;
 	int BestPlace;
 	int BestLevel;
 	Vector2 *FloorSpaces = new Vector2[eCount];
-	int levelFloorSpaces[20] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }; //кол-во элементов в уровне на потолке
+	int levelFloorSpaces[30] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }; //кол-во элементов в уровне на потолке
 	int howmany = eCount;
-	auto FSnumbers = new int[howmany][20](); // номера элементов на потолке по уровням
+	auto FSnumbers = new int[howmany][30](); // номера элементов на потолке по уровням
 
 	sortNonDecr(_bloxArray, bloxHeights, bloxWidths);
 

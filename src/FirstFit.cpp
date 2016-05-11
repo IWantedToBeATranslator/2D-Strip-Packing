@@ -2,9 +2,9 @@
 
 FirstFit::FirstFit()
 {
-	int levelH[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	int levelH[30] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	int levels = 1;
-	int levelW[15] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	int levelW[30] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	int levelHmin;
 
 	sortNonDecr(_bloxArray, bloxHeights, bloxWidths);

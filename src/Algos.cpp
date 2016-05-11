@@ -39,6 +39,16 @@ void Algos(int AlgNumber)
 		FloorCeiling();
 		break;
 	}
+	case (-3):
+	{
+		if(_blockClip->getY()<2*_blockClip->getHeight()/3) _blockClip->addTween(Actor::TweenPosition(_blockClip->getX(),_blockClip->getY()-250), 100);
+		break;
+	}
+	case (-2):
+	{
+		if(_blockClip->getY()<0) _blockClip->addTween(Actor::TweenPosition(_blockClip->getX(),_blockClip->getY()+250), 100);
+		break;
+	}
 	case (10):
 	{
 		int timeseed = time(0);
