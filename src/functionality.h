@@ -1,9 +1,7 @@
-#include "oxygine-framework.h"
-using namespace oxygine;
 #include <functional>
 #include "MainActor.h"
-#include "Shared.h"
 #include "AlgButton.h"
+using namespace oxygine;
 
 void func_preinit();
 void func_init();

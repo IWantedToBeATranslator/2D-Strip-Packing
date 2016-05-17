@@ -1,7 +1,6 @@
-#include "oxygine-framework.h"
-using namespace oxygine;
 #include <functional>
 #include "Shared.h"
+using namespace oxygine;
 
 class MainActor : public Actor
 {
@@ -19,7 +18,6 @@ public:
 	float stageWidth = getStage()->getWidth();
 
 	MainActor();
-	//spColorRectSprite spawnGradientBlock(int Decreaser);
 };
 
 DECLARE_SMART(MainActor, spMainActor);

@@ -10,8 +10,8 @@ FirstFit::FirstFit()
 	sortNonDecr(_bloxArray, bloxHeights, bloxWidths);
 
 	_bloxArray[0]->addTween(Actor::TweenPosition(0, 0), 500);
-	levelH[1] = _bloxArray[0]->getHeight();
-	levelW[0] = _bloxArray[0]->getWidth();
+	levelH[1] = bloxHeights[0];
+	levelW[0] = bloxWidths[0];
 	levelHmin = levelH[1];
 
 	bool checker = false;
@@ -21,20 +21,21 @@ FirstFit::FirstFit()
 		checker = false;
 		FOR(k, 0, levels)
 		{
-			if (clipWidth - levelW[k] >= _bloxArray[i]->getWidth() && !checker)
+			if (clipWidth - levelW[k] >= bloxWidths[i])
 			{
 				_bloxArray[i]->addTween(Actor::TweenPosition(levelW[k], levelH[k]), 500);
-				levelW[k] += _bloxArray[i]->getWidth();
+				levelW[k] += bloxWidths[i];
 				checker = true;
+				break;
 			}
 		}
 		if (!checker)
 		{
 			levels++;
-			levelHmin += _bloxArray[i]->getHeight();
+			levelHmin += bloxHeights[i];
 			levelH[levels] = levelHmin;
 			_bloxArray[i]->addTween(Actor::TweenPosition(levelW[levels - 1], levelH[levels - 1]), 500);
-			levelW[levels - 1] += _bloxArray[i]->getWidth();
+			levelW[levels - 1] += bloxWidths[i];
 		}
 	}
 

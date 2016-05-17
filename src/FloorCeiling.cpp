@@ -85,7 +85,7 @@ FloorCeiling::FloorCeiling()
 				_bloxArray[i]->addTween(Actor::TweenPosition(levelW[BestLevel], levelH[BestLevel + 1] - _bloxArray[i]->getHeight()), 500);
 				levelW[BestLevel] += _bloxArray[i]->getWidth();
 				FSnumbers[levelFloorSpaces[BestLevel]][BestLevel] = i;
-				FloorSpaces[i] = Vector2(clipWidth - BestPlace, levelH[BestLevel+1] - _bloxArray[i]->getHeight() - levelH[BestLevel]);
+				FloorSpaces[i] = Vector2(clipWidth - BestPlace, levelH[BestLevel + 1] - _bloxArray[i]->getHeight() - levelH[BestLevel]);
 				levelFloorSpaces[BestLevel]++;
 			}
 			// On floor
@@ -103,9 +103,9 @@ FloorCeiling::FloorCeiling()
 
 	FOR(i, 0, levels)
 		FOR(n, 0, levelFloorSpaces[i])
-		{
-			int a = 1;
-		}
+	{
+		int a = 1;
+	}
 
 	algosHeights = levelHmin;
 	updateState;

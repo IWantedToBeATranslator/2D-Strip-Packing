@@ -6,14 +6,12 @@ BestFit::BestFit()
 	int levels = 1;
 	int levelW[30] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	int levelHmin;
-	int BestPlace;
-	int BestLevel;
 
 	sortNonDecr(_bloxArray, bloxHeights, bloxWidths);
 
 	_bloxArray[0]->addTween(Actor::TweenPosition(0, 0), 500);
-	levelH[1] = _bloxArray[0]->getHeight();
-	levelW[0] = _bloxArray[0]->getWidth();
+	levelH[1] = bloxHeights[0];
+	levelW[0] = bloxWidths[0];
 	levelHmin = levelH[1];
 
 	bool checker = false;
@@ -21,11 +19,11 @@ BestFit::BestFit()
 	FOR(i, 1, eCount)
 	{
 		checker = false;
-		BestPlace = 0;
-		BestLevel = levels;
+		int BestPlace = 0;
+		int BestLevel = levels;
 		FOR(k, 0, levels)
 		{
-			if (clipWidth - levelW[k] >= _bloxArray[i]->getWidth() && BestPlace < levelW[k])
+			if (clipWidth - levelW[k] >= bloxWidths[i] && BestPlace < levelW[k])
 			{
 				BestPlace = levelW[k];
 				BestLevel = k;
@@ -35,15 +33,15 @@ BestFit::BestFit()
 		if (!checker)
 		{
 			levels++;
-			levelHmin += _bloxArray[i]->getHeight();
+			levelHmin += bloxHeights[i];
 			levelH[levels] = levelHmin;
 			_bloxArray[i]->addTween(Actor::TweenPosition(levelW[levels - 1], levelH[levels - 1]), 500);
-			levelW[levels - 1] += _bloxArray[i]->getWidth();
+			levelW[levels - 1] += bloxWidths[i];
 		}
 		else
 		{
 			_bloxArray[i]->addTween(Actor::TweenPosition(levelW[BestLevel], levelH[BestLevel]), 500);
-			levelW[BestLevel] += _bloxArray[i]->getWidth();
+			levelW[BestLevel] += bloxWidths[i];
 		}
 	}
 

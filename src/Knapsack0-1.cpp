@@ -1,22 +1,22 @@
 ﻿#include "Knapsack0-1.h"
 
 Knapsack01::Knapsack01()
-{	
+{
 	sortNonDecr(_bloxArray, bloxHeights, bloxWidths);
 
-	auto bloxData = new int[eCount][2];
 	bool *packedBlox = new bool[eCount];
 	FOR(i, 0, eCount) packedBlox[i] = false;
 
 	int levels = 0;
 	int levelHeights[60];
 	FOR(i, 0, 60) levelHeights[i] = 0;
-	int levelWidths[60];
-	FOR(i, 0, 60) levelWidths[i] = clipWidth;
 	int levelPositions[60];
 	FOR(i, 0, 60) levelPositions[i] = 0;
 
 	bool packed = false;
+
+	int *KPMatrix;
+	KPMatrix = new int[(eCount+1)*(clipWidth+1)];
 
 	do
 	{
@@ -37,37 +37,32 @@ Knapsack01::Knapsack01()
 		}
 
 		//make a matrix width * unpacked amount
-		int tempWidth = levelWidths[levels - 1];
-		int *KPMatrix;
-		KPMatrix = new int[counter*tempWidth];
-		delete[] KPMatrix;
-		FOR(i, 0, counter)
-			FOR(j, 0, tempWidth)
-				KPMatrix[i*tempWidth + j] = 0;
+		int tempWidth = clipWidth;
+		FOR(i, 0, counter+1)
+			FOR(j, 0, tempWidth+1)
+			KPMatrix[i*tempWidth + j] = 0;
 
 		//fill matrix
-		FOR(k, 1, counter)
+		FOR(k, 1, counter + 1)
 		{
-			FOR(y, 1, tempWidth+1)
+			FOR(y, 1, tempWidth + 1)
 			{
-				if (y < bloxWidths[whatToPack[k-1]])
+				if (y < bloxWidths[whatToPack[k - 1]])
 				{
 					KPMatrix[k*tempWidth + (y - 1)] = KPMatrix[(k - 1)*tempWidth + (y - 1)];
 				}
 				else if (y > bloxWidths[whatToPack[k - 1]])
 				{
 					KPMatrix[k*tempWidth + (y - 1)] =
-						MAX(KPMatrix[(k - 1)*tempWidth + (y - 1)], KPMatrix[(k - 1)*tempWidth + (y - 1) - bloxWidths[whatToPack[k - 1]]]
-						+ bloxWidths[whatToPack[k - 1]] * bloxHeights[whatToPack[k - 1]]);
+						MAX(KPMatrix[(k - 1)*tempWidth + (y - 1)], KPMatrix[(k - 1)*tempWidth + ((y - 1) - bloxWidths[whatToPack[k - 1]])]
+							+ bloxWidths[whatToPack[k - 1]] * bloxHeights[whatToPack[k - 1]]);
 				}
 				else
 				{
 					KPMatrix[k*tempWidth + (y - 1)] =
-						MAX(KPMatrix[(k - 1)*(tempWidth+1) + (y - 1)], bloxWidths[whatToPack[k - 1]] * bloxHeights[whatToPack[k - 1]]);
+						MAX(KPMatrix[(k - 1)*(tempWidth + 1) + (y - 1)], bloxWidths[whatToPack[k - 1]] * bloxHeights[whatToPack[k - 1]]);
 				}
-				int a = 1;
 			}
-			int b = 1;
 		}
 
 		//array for answers
@@ -96,17 +91,16 @@ Knapsack01::Knapsack01()
 				if (first) { levelHeights[levels] = levelHeights[levels - 1] + bloxHeights[whatToPack[i]]; first = false; }
 				_bloxArray[whatToPack[i]]->addTween(Actor::TweenPosition(levelPositions[levels - 1], levelHeights[levels - 1]), 500);
 				levelPositions[levels - 1] += bloxWidths[whatToPack[i]];
-				levelWidths[levels - 1] = levelWidths[levels-1] - bloxWidths[whatToPack[i]];
 				packedBlox[whatToPack[i]] = true;
 			}
 		}
 
 		//packed check
 		packed = true;
-		FOR(i, 0, eCount)
-			if (!packedBlox[i]) { packed = false; break; }
+		FOR(i, 0, eCount) if (!packedBlox[i]) { packed = false; break; }
 	} while (!packed);
 
+	delete[] KPMatrix;
 	algosHeights = levelHeights[levels];
 	updateState;
 }

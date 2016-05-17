@@ -7,14 +7,14 @@ MainActor::MainActor()
 			new ClipRectActor,
 			arg_x = 0,
 			arg_y = 0,
-			arg_size = Vector2(stageWidth - buttonWidth, 3*stageHeight)
+			arg_size = Vector2(stageWidth - buttonWidth, 3 * stageHeight)
 		);
 		getStage()->addChild(blockClip);
 
 		_blockClip = blockClip;
 		clipHeight = _blockClip->getHeight();
 		clipWidth = _blockClip->getWidth();
-		
+
 		algosHeights = 0;
 		algosSpaces = 0;
 		spaceUsed = 0;

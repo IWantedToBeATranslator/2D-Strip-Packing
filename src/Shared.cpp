@@ -50,10 +50,10 @@ spColorRectSprite spawnRandomBlock(float stageWidth, float stageHeight, float bu
 	spColorRectSprite right = initActor(
 		new ColorRectSprite,
 		arg_color = Color::Black,
-		arg_x = bloxWidth-1,
+		arg_x = bloxWidth,
 		arg_y = 0,
 		arg_w = 1,
-		arg_h = bloxHeight,
+		arg_h = bloxHeight + 1,
 		arg_attachTo = blox,
 		arg_blend = blend_disabled
 	);
@@ -75,8 +75,8 @@ spColorRectSprite spawnRandomBlock(float stageWidth, float stageHeight, float bu
 		new ColorRectSprite,
 		arg_color = Color::Black,
 		arg_x = 0,
-		arg_y = bloxHeight-1,
-		arg_w = bloxWidth,
+		arg_y = bloxHeight,
+		arg_w = bloxWidth + 1,
 		arg_h = 1,
 		arg_attachTo = blox,
 		arg_blend = blend_disabled
@@ -119,7 +119,7 @@ void sortNonDecr(spColorRectSprite * blocks, int * blockHeights, int * blockWidt
 	int tempbuf;
 	FOR(m, 0, eCount)
 	{
-		FOR(n, 0, eCount-1)
+		FOR(n, 0, eCount - 1)
 		{
 			if (blockHeights[n] < blockHeights[n + 1])
 			{

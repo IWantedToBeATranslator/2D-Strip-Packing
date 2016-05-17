@@ -24,6 +24,7 @@ void func_init()
 	);
 	actor->addChild(Bound);
 
+	//create buttons
 	AlgButton NFDH = *new AlgButton(actor->stageWidth - actor->buttonWidth, 0, "Next Fit\nDecr High", 1);
 	AlgButton FFDH = *new AlgButton(actor->stageWidth - actor->buttonWidth, actor->buttonHeight, "First Fit\nDecr High", 2);
 	AlgButton BFDH = *new AlgButton(actor->stageWidth - actor->buttonWidth, 2 * actor->buttonHeight, "Best Fit\nDecr High", 3);
@@ -32,8 +33,8 @@ void func_init()
 	AlgButton JOIN = *new AlgButton(actor->stageWidth - actor->buttonWidth, 5 * actor->buttonHeight, "Join", 6);
 	AlgButton FCNR = *new AlgButton(actor->stageWidth - actor->buttonWidth, 6 * actor->buttonHeight, "Floor Ceiling\nNo Rotation", 7);
 	AlgButton REST = *new AlgButton(actor->stageWidth - actor->buttonWidth, 7 * actor->buttonHeight, "Reset", 10);
-	AlgButton UP = *new AlgButton(actor->stageWidth - actor->buttonSmallWidth, actor->stageHeight-2*actor->buttonSmallHeight, -2);
-	AlgButton DN = *new AlgButton(actor->stageWidth - actor->buttonSmallWidth, actor->stageHeight- actor->buttonSmallHeight, -3);
+	AlgButton UP = *new AlgButton(actor->stageWidth - actor->buttonSmallWidth, actor->stageHeight - 2 * actor->buttonSmallHeight, -2);
+	AlgButton DN = *new AlgButton(actor->stageWidth - actor->buttonSmallWidth, actor->stageHeight - actor->buttonSmallHeight, -3);
 
 	//append buttons to MainActor
 	actor->addChild(NFDH.getButton());
@@ -47,6 +48,7 @@ void func_init()
 	actor->addChild(UP.getButton());
 	actor->addChild(DN.getButton());
 
+	//add some info
 	spTextField mainInfo = initActor(
 		new TextField,
 		arg_color = Color(0, 0, 0),

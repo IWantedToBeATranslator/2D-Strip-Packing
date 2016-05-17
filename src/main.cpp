@@ -7,7 +7,6 @@ using namespace oxygine;
 // This function is called each frame
 int mainloop()
 {
-	// It gets passed to our example game implementation
 	func_update();
 
 	// Update our stage
@@ -61,7 +60,7 @@ void run()
 	//debugger->show();
 	debugger->setCornerPosition(2);
 
-	// Initializes our example game. See example.cpp
+	// Initialize
 	func_init();
 
 #ifdef EMSCRIPTEN

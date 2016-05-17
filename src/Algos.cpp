@@ -41,12 +41,12 @@ void Algos(int AlgNumber)
 	}
 	case (-3):
 	{
-		if(_blockClip->getY()<2*_blockClip->getHeight()/3) _blockClip->addTween(Actor::TweenPosition(_blockClip->getX(),_blockClip->getY()-250), 100);
+		if (_blockClip->getY() < 2 * _blockClip->getHeight() / 3) _blockClip->addTween(Actor::TweenPosition(_blockClip->getX(), _blockClip->getY() - 250), 100);
 		break;
 	}
 	case (-2):
 	{
-		if(_blockClip->getY()<0) _blockClip->addTween(Actor::TweenPosition(_blockClip->getX(),_blockClip->getY()+250), 100);
+		if (_blockClip->getY() < 0) _blockClip->addTween(Actor::TweenPosition(_blockClip->getX(), _blockClip->getY() + 250), 100);
 		break;
 	}
 	case (10):
@@ -99,4 +99,6 @@ void Algos(int AlgNumber)
 		break;
 	}
 	}
+	if (AlgNumber > 0 && AlgNumber <= 7) log::message("%d: %d; %d; %f\n", AlgNumber, algosHeights, (int)(algosHeights*clipWidth - spaceUsed), spaceUsed / (clipWidth*algosHeights));
+	else if (AlgNumber == 10) log::message("------------------\n");
 }

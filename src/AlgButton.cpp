@@ -23,7 +23,7 @@ AlgButton::AlgButton(int x, int y, std::string textstr, int actionNumber)
 
 	button->addEventListener(TouchEvent::CLICK, [](Event * e)->void
 	{
-		log::messageln("button clicked");
+		//log::messageln("button clicked");
 	});
 
 #endif
@@ -68,7 +68,7 @@ AlgButton::AlgButton(int x, int y, int actionNumber)
 
 	button->addEventListener(TouchEvent::CLICK, [](Event * e)->void
 	{
-		log::messageln("button clicked");
+		//log::messageln("button clicked");
 	});
 
 #endif
@@ -87,8 +87,8 @@ AlgButton::AlgButton(int x, int y, int actionNumber)
 	style.hAlign = TextStyle::HALIGN_CENTER;
 
 	text->setStyle(style);
-	if (actionNumber==-2)	text->setText("UP");
-	if (actionNumber==-3)	text->setText("DN");
+	if (actionNumber == -2)	text->setText("UP");
+	if (actionNumber == -3)	text->setText("DN");
 }
 
 spSprite AlgButton::getButton()

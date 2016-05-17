@@ -9,21 +9,21 @@ NextFit::NextFit()
 	sortNonDecr(_bloxArray, bloxHeights, bloxWidths);
 
 	_bloxArray[0]->addTween(Actor::TweenPosition(0, 0), 500);
-	levelH = _bloxArray[0]->getHeight();
-	levelW = _bloxArray[0]->getWidth();
+	levelH = bloxHeights[0];
+	levelW = bloxWidths[0];
 
 	FOR(i, 1, eCount)
 	{
-		if (clipWidth - levelW >= _bloxArray[i]->getWidth())
+		if (clipWidth - levelW >= bloxWidths[i])
 		{
 			_bloxArray[i]->addTween(Actor::TweenPosition(levelW, levelHminus), 500);
-			levelW += _bloxArray[i]->getWidth();
+			levelW += bloxWidths[i];
 		}
 		else
 		{
 			levelHminus = levelH;
-			levelW = _bloxArray[i]->getWidth();
-			levelH += _bloxArray[i]->getHeight();
+			levelW = bloxWidths[i];
+			levelH += bloxHeights[i];
 			_bloxArray[i]->addTween(Actor::TweenPosition(0, levelHminus), 500);
 		}
 	}
