@@ -7,7 +7,7 @@ This is basically my bachelor project done to showcase different basic 2DSP algo
 1. Next Fit Decreasing Height (done)
 2. First Fit Decreasing Height (done)
 3. Best Fit Decreasing Height (done)
-4. Knapsack 0-1 (kinda done)
+4. Knapsack 0-1 (done)
 5. Split-Fit (done)
 6. Join (done)
 7. Floor Ceiling No Rotation (done)
